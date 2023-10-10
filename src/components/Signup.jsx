@@ -1,8 +1,10 @@
 import { Card, Form, Button } from "react-bootstrap";
 import { useRef } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export const Signup = () => {
+  const navigate = useNavigate();
   const emailRef = useRef();
   const passwordRef = useRef();
   const { signup } = useAuth();
@@ -11,6 +13,7 @@ export const Signup = () => {
     e.preventDefault();
     try {
       signup(emailRef.current.value, passwordRef.current.value);
+      navigate("/");
     } catch (error) {
       console.log(error);
     }

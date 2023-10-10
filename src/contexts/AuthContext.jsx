@@ -3,8 +3,6 @@ import { createClient } from "@supabase/supabase-js";
 
 const AuthContext = React.createContext();
 
-console.log(import.meta.env.VITE_SUPABASE_URL);
-
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,
   import.meta.env.VITE_SUPABASE_ANON_KEY
@@ -33,6 +31,23 @@ export const AuthProvider = ({ children }) => {
     return data.user;
   };
 
-  const value = { currentUser, signup };
+  const signin = async (email, password) => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+
+    if (error) {
+      console.log(error);
+      alert(error.message);
+      return error;
+    }
+
+    setCurrentUser(data);
+
+    return data;
+  };
+
+  const value = { currentUser, signup, signin };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
