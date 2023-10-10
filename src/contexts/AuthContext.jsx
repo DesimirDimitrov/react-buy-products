@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
-const AuthContext = React.createContext();
+export const AuthContext = React.createContext();
 
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,
