@@ -23,6 +23,17 @@ export const DefaultProducts = () => {
         "selectedProducts",
         JSON.stringify([...context.selectedProducts])
       );
+
+      // supabase update quantity in database
+      try {
+        await supabase
+          .from("buyproducts")
+          .update({ quantity: selectedProduct.quantity })
+          .eq("user_id", JSON.parse(localStorage.getItem("user")).id)
+          .eq("product_id", product.id);
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       const selectedProduct = {
         id: product.id,
