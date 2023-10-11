@@ -34,6 +34,7 @@ export const TopNavigation = () => {
         )}
         {currentUser && (
           <li>
+            <span>{currentUser.email} &nbsp;</span>
             <button onClick={handleLogOut}>Изход</button>
           </li>
         )}
