@@ -1,12 +1,20 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../contexts/AuthContext";
+import { useState, useEffect } from "react";
 
 export const TopNavigation = () => {
-  const context = useContext(AuthContext);
-  const user = context.currentUser?.user;
+  const [currentUser, setCurrentUser] = useState();
+  const user = localStorage.getItem("user");
 
-  console.log(context.currentUser);
+  useEffect(() => {
+    if (user) {
+      setCurrentUser(JSON.parse(user));
+    }
+  }, [user]);
+
+  const handleLogOut = () => {
+    localStorage.removeItem("user");
+    window.location.href = "/";
+  };
 
   return (
     <div>
@@ -14,19 +22,21 @@ export const TopNavigation = () => {
         <li>
           <Link to="/">Начало</Link>
         </li>
-        {!user && (
+        {!currentUser && (
           <li>
             <Link to="signup">Регистрация</Link>
           </li>
         )}
-        {!user && (
+        {!currentUser && (
           <li>
             <Link to="signin">Вход</Link>
           </li>
         )}
-        <li>
-          <Link to="signout">Изход</Link>
-        </li>
+        {currentUser && (
+          <li>
+            <button onClick={handleLogOut}>Изход</button>
+          </li>
+        )}
       </ul>
     </div>
   );

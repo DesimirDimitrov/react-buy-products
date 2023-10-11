@@ -1,17 +1,22 @@
-import { useContext } from "react";
 import { TopNavigation } from "./TopNavigation";
 import { AuthContext } from "../contexts/AuthContext";
-
+import { useContext, useEffect, useState } from "react";
 export const Home = () => {
+  const [currentUser, setCurrentUser] = useState();
   const context = useContext(AuthContext);
-  const user = context.currentUser?.user;
+  let user = context.currentUser?.user;
 
-  console.log(user);
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      setCurrentUser(JSON.parse(user));
+    }
+  }, [user]);
 
   return (
     <div>
       <TopNavigation />
-      {user && <div>Logged in: {user.email}</div>}
+      {currentUser && <div>Logged in: {currentUser.email}</div>}
     </div>
   );
 };
