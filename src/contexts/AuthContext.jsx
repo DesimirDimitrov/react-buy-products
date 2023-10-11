@@ -20,12 +20,11 @@ export const AuthProvider = ({ children }) => {
 
     if (error) {
       console.log(error);
-      alert(error.message);
       return error;
     }
 
-    setCurrentUser(data.user);
     setItem(data.user);
+    setCurrentUser(data.user);
 
     return data.user;
   };
@@ -38,12 +37,11 @@ export const AuthProvider = ({ children }) => {
 
     if (error) {
       console.log(error);
-      alert(error.message);
       return error;
     }
 
-    setCurrentUser(data);
     setItem(data.user);
+    setCurrentUser(data);
 
     return data;
   };

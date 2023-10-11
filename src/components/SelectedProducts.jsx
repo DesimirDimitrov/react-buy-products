@@ -7,9 +7,7 @@ export const SelectedProducts = () => {
   const [selectedProducts, setSelectedProducts] = useState([]);
 
   async function getSelectedProducts() {
-    console.log("getSelectedProducts");
     const user = JSON.parse(localStorage.getItem("user"));
-    console.log(`userid: ${user.id}`);
     let { data, error } = await supabase
       .from("buyproducts")
       .select()
@@ -18,7 +16,6 @@ export const SelectedProducts = () => {
     if (error) {
       console.warn(error);
     } else if (data) {
-      console.log(data);
       setSelectedProducts(data);
     }
   }
@@ -40,7 +37,6 @@ export const SelectedProducts = () => {
         .delete()
         .eq("user_id", JSON.parse(localStorage.getItem("user")).id)
         .then(() => {
-          console.log("deleted");
           setSelectedProducts([]);
         });
     } catch (error) {
