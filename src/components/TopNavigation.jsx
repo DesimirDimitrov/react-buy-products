@@ -29,7 +29,9 @@ export const TopNavigation = () => {
         )}
         {!currentUser && (
           <li>
-            <Link to="signin">Вход</Link>
+            <button>
+              <Link to="signin">Вход</Link>
+            </button>
           </li>
         )}
         {currentUser && (

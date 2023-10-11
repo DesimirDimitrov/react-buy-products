@@ -21,21 +21,21 @@ export const Signin = () => {
 
   return (
     <div>
-      <h2>Sign in</h2>
+      <h2>ВХОД</h2>
       <div style={{ maxWidth: "400px" }}>
         <Card>
           <Card.Body>
             <Form onSubmit={handleSubmit}>
               <Form.Group id="email">
-                <Form.Label>Email</Form.Label>
+                <Form.Label>Електронна поща</Form.Label>
                 <Form.Control type="email" ref={emailRef} />
               </Form.Group>
               <Form.Group id="password">
-                <Form.Label>Password</Form.Label>
+                <Form.Label>Парола</Form.Label>
                 <Form.Control type="password" ref={passwordRef} />
               </Form.Group>
               <Button className="w-100" type="submit">
-                Sign In
+                ВХОД
               </Button>
             </Form>
           </Card.Body>
