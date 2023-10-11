@@ -1,17 +1,31 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GLOBAL_CONTEXT } from "../contexts/GlobalStore";
+import { supabase } from "./../config/supabaseClient";
 
 export const SelectedProducts = () => {
   const { context, setContext } = useContext(GLOBAL_CONTEXT);
-  const selectedProducts = getSelectedProducts();
-  function getSelectedProducts() {
-    if (!localStorage.getItem("selectedProducts")) {
-      return [];
-    }
+  const [selectedProducts, setSelectedProducts] = useState([]);
 
-    const products = localStorage.getItem("selectedProducts");
-    return products ? JSON.parse(products) : [];
+  async function getSelectedProducts() {
+    console.log("getSelectedProducts");
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log(`userid: ${user.id}`);
+    let { data, error } = await supabase
+      .from("buyproducts")
+      .select()
+      .eq("user_id", user.id);
+
+    if (error) {
+      console.warn(error);
+    } else if (data) {
+      console.log(data);
+      setSelectedProducts(data);
+    }
   }
+
+  useEffect(() => {
+    getSelectedProducts();
+  }, []);
 
   const handleEmptyBasket = () => {
     setContext({
@@ -21,7 +35,7 @@ export const SelectedProducts = () => {
     localStorage.setItem("selectedProducts", JSON.stringify([]));
   };
 
-  const handleDeleteSelectedProduct = (product) => {
+  const handleDeleteSelectedProduct = async (product) => {
     const newSelectedProducts = selectedProducts.filter(
       (productItem) => productItem.id !== product.id
     );
@@ -43,7 +57,7 @@ export const SelectedProducts = () => {
           return (
             <div key={product.id}>
               <h3>
-                {product.name} ({product.quantity}){" "}
+                {product.product_name} ({product.quantity}){" "}
                 <button
                   onClick={() => {
                     handleDeleteSelectedProduct(product);
