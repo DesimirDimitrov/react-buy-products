@@ -1,15 +1,9 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export const TopNavigation = () => {
-  const [currentUser, setCurrentUser] = useState();
   const user = localStorage.getItem("user");
-
-  useEffect(() => {
-    if (user) {
-      setCurrentUser(JSON.parse(user));
-    }
-  }, [user]);
+  const [currentUser] = useState(user ? JSON.parse(user) : null);
 
   const handleLogOut = () => {
     localStorage.removeItem("user");
