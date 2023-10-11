@@ -1,13 +1,8 @@
 import React, { useContext, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "./../config/supabaseClient";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export const AuthContext = React.createContext();
-
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-);
 
 export function useAuth() {
   return useContext(AuthContext);

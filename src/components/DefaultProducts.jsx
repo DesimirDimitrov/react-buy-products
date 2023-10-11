@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { GLOBAL_CONTEXT } from "../contexts/GlobalStore";
+import { supabase } from "./../config/supabaseClient";
 
 export const DefaultProducts = () => {
   const { context, setContext } = useContext(GLOBAL_CONTEXT);
   const defaultProducts =
     context && context.defaultProducts ? context.defaultProducts : [];
 
-  const handleProductSelect = (product) => {
+  const handleProductSelect = async (product) => {
     const productAlreadySelected = productExists(product);
 
     if (productAlreadySelected) {
@@ -37,6 +38,20 @@ export const DefaultProducts = () => {
         "selectedProducts",
         JSON.stringify([...context.selectedProducts, selectedProduct])
       );
+
+      const user = localStorage.getItem("user");
+      const dbData = {
+        product_id: product.id,
+        product_name: product.name,
+        user_id: user ? JSON.parse(user).id : null,
+        quantity: 1,
+      };
+
+      try {
+        await supabase.from("buyproducts").insert([dbData]);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
