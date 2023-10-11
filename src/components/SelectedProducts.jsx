@@ -33,6 +33,19 @@ export const SelectedProducts = () => {
     });
 
     localStorage.setItem("selectedProducts", JSON.stringify([]));
+
+    try {
+      supabase
+        .from("buyproducts")
+        .delete()
+        .eq("user_id", JSON.parse(localStorage.getItem("user")).id)
+        .then(() => {
+          console.log("deleted");
+          setSelectedProducts([]);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleDeleteSelectedProduct = async (product) => {
