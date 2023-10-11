@@ -48,6 +48,13 @@ export const SelectedProducts = () => {
       "selectedProducts",
       JSON.stringify(newSelectedProducts)
     );
+
+    try {
+      await supabase.from("buyproducts").delete().eq("id", product.id);
+      await getSelectedProducts();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
