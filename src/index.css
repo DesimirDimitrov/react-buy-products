@@ -76,3 +76,7 @@ ul.nav li:last-child {
 li {
   list-style: none;
 }
+
+button {
+  border-radius: 5px;
+}

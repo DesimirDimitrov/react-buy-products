@@ -81,7 +81,7 @@ export const DefaultProducts = () => {
       {defaultProducts &&
         defaultProducts.map((product) => {
           return (
-            <li key={product.id}>
+            <li style={{ textAlign: "center" }} key={product.id}>
               <button
                 style={{ minWidth: "200px", margin: "10px", padding: "5px" }}
                 onClick={() => handleProductSelect(product)}
