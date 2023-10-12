@@ -83,7 +83,7 @@ export const DefaultProducts = () => {
           return (
             <li key={product.id}>
               <button
-                style={{ margin: "10px", padding: "5px" }}
+                style={{ minWidth: "200px", margin: "10px", padding: "5px" }}
                 onClick={() => handleProductSelect(product)}
               >
                 {product.name}
