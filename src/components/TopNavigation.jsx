@@ -16,28 +16,32 @@ export const TopNavigation = () => {
     window.location.href = "/";
   };
 
+  const handleRefreshData = () => {
+    window.location.reload();
+  };
+
   return (
     <div>
-      <ul>
-        <li>
-          <Link to="/">Начало</Link>
-        </li>
+      <ul className="topNavigation">
         {!currentUser && (
           <li>
-            <Link to="signup">Регистрация</Link>
+            <Link style={{ textDecoration: "none" }} to="signin">
+              <button style={{ padding: "1rem" }}>Вход</button>
+            </Link>
           </li>
         )}
         {!currentUser && (
           <li>
-            <button>
-              <Link to="signin">Вход</Link>
-            </button>
+            <Link to="signup">Регистрация</Link>
           </li>
         )}
         {currentUser && (
           <li>
             <span>{currentUser.email} &nbsp;</span>
             <button onClick={handleLogOut}>Изход</button>
+            <button onClick={handleRefreshData} style={{ float: "right" }}>
+              Обнови
+            </button>
           </li>
         )}
       </ul>

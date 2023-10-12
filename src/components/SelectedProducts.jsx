@@ -71,10 +71,11 @@ export const SelectedProducts = () => {
       {selectedProducts &&
         selectedProducts.map((product) => {
           return (
-            <div key={product.id}>
+            <div style={{ margin: "1rem 0" }} key={product.id}>
               <h3>
                 {product.product_name} ({product.quantity}){" "}
                 <button
+                  style={{ float: "right" }}
                   onClick={() => {
                     handleDeleteSelectedProduct(product);
                   }}
@@ -85,10 +86,7 @@ export const SelectedProducts = () => {
             </div>
           );
         })}
-      <button
-        style={{ margin: "10px", padding: "5px" }}
-        onClick={handleEmptyBasket}
-      >
+      <button style={{ margin: "1rem 0" }} onClick={handleEmptyBasket}>
         Изпразни кошницата
       </button>
     </div>

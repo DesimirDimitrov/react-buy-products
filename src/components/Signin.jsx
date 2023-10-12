@@ -20,7 +20,7 @@ export const Signin = () => {
   }
 
   return (
-    <div>
+    <div style={{ margin: "1rem" }}>
       <h2>ВХОД</h2>
       <div style={{ maxWidth: "400px" }}>
         <Card>
@@ -34,6 +34,7 @@ export const Signin = () => {
                 <Form.Label>Парола</Form.Label>
                 <Form.Control type="password" ref={passwordRef} />
               </Form.Group>
+              <br />
               <Button className="w-100" type="submit">
                 ВХОД
               </Button>
