@@ -72,7 +72,7 @@ export const SelectedProducts = () => {
         selectedProducts.map((product) => {
           return (
             <div style={{ margin: "1rem 0" }} key={product.id}>
-              <h3>
+              <h6>
                 {product.product_name} ({product.quantity}){" "}
                 <button
                   style={{ float: "right" }}
@@ -82,7 +82,7 @@ export const SelectedProducts = () => {
                 >
                   Изтрий
                 </button>
-              </h3>
+              </h6>
             </div>
           );
         })}
